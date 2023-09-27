@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工程師資料更新</title>
+    <link rel="icon" href=".\static\engineer-update.png" type="image/png">
+    <!-- 引入自定義的CSS樣式表，使用Flask的url_for函數動態生成路徑 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='engineer_update_styles.css') }}">
+    <!-- 引入自定義的JavaScript文件，使用Flask的url_for函數動態生成路徑，且設定為異步加載 -->
+    <script src="{{ url_for('static', filename='engineer_update_script.js') }}" defer></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><h1>智新資通股份有限公司</h1></div>
+        <div class="nav-buttons">
+            <button onclick="location.href='/'">推薦系統</button>
+            <button onclick="location.href='/engineer_update'">工程師資料更新</button>
+            <button onclick="location.href='/model_update'">模型更新</button>
+        </div>
+    </div>
+
+    <div class="content-wrapper"> 
+        <div class="header-wrapper">
+            <h2><b>工程師列表</b></h2>
+            <div class="hover-text">
+                <span class="info-icon">&#x2139;  
+                    <span class="tooltip-text" id="fade">操作說明
+
+                        編輯工程師資料：
+                        點擊「Edit」按鈕，可以編輯該工程師的資料。
+                        編輯完成後，請記得點擊「Save」按鈕，以儲存您所做的更改。
+
+                        刪除工程師資料：
+                        點擊資料旁的「Delete」按鈕，系統將刪除該筆工程師資料。
+
+                        新增工程師資料：
+                        點擊「新增工程師資料」的按鈕，列表將新增一列，供您輸入新的工程師資料。
+                        輸入完畢後，請點擊「Save」按鈕，將新的工程師資料儲存至系統中。
+
+                        專案喜好與擅長評分說明：
+                        對於每一種專案類型提供「喜好」和「擅長」的評分。
+                        擅長：此評分表示工程師對該專案類型的擅長程度。
+                        喜好：此評分表示工程師對該專案類型的喜好程度。
+                        評分範圍為0到5，0表示非常不喜歡/非常不擅長，而5表示非常喜歡/非常擅長。
+                    </span>
+                </span>
+            </div>            
+        </div>
+        <div class="scrollable-table">
+            <table id="csvTable" border="1">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <button class="addbutton" onclick="addDataRow()">新增工程師資料</button>
+    </div>
+</body>
+</html>
+

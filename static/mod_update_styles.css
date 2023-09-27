@@ -1,0 +1,416 @@
+/* 設定網頁主體的基本樣式 */
+body {
+font-family: Arial, sans-serif;  /* 字型設定為Arial，如果找不到則使用系統的sans-serif字型 */
+margin: 0;                       /* 邊距設為0 */
+padding: 0;                      /* 內距設為0 */
+background-color: #eeeeee;       /* 設定背景顏色 */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+/* --------------------------- 最上面的智新資通股份有限公司及三個按鈕 ----------------------------*/
+/* 設定頁首的樣式 */
+.header {
+position: fixed;                      /* 使用固定位置，始終保持在視口頂部 */
+top: 0;                               /* 距離頂部0像素 */
+left: 0;                              /* 距離左邊0像素 */
+right: 0;                             /* 距離右邊0像素 */
+display: flex;                        /* 使用flexbox佈局 */
+justify-content: space-between;       /* 內容之間的空間均等分布 */
+background-color: #ffffff;            /* 背景顏色*/
+padding: 0.5% 1%;                   /* 內距 */
+align-items: flex-start;              /* 內容靠上對齊 */
+z-index: 10;                          /* 堆疊順序設為*/
+}
+
+/* 設定logo區塊的樣式 */
+.logo {
+margin: 0;                            /* 外距*/
+}
+
+/* 設定logo中的標題樣式 */
+.logo h1 {
+margin: 0;                            /* 外距*/
+padding: 0;                           /* 內距*/
+font-size: 150%;                      /* 字體大小 */
+color: #333;                          /* 文字顏色 */
+}
+
+/* 設定導航按鈕的容器樣式 */
+.nav-buttons {
+display: flex;                        /* 使用flexbox佈局 */
+gap: 2%;                            
+}
+
+/* 設定導航按鈕的樣式 */
+.nav-buttons button {
+background-color: #3999ff;
+color: white;
+border: none;
+padding: 1.5% 3%;
+border-radius: 4%;
+cursor: pointer;
+width: 12em !important;
+font-size: 1.2em;
+font-weight: bold;
+}
+
+/* 設定導航按鈕滑鼠懸停時的樣式 */
+.nav-buttons button:hover {
+transform: scale(1.03); /* 這將按鈕放大10% */
+transition: transform 0.1s ease; /* 這將平滑地過渡放大效果，時長為0.3秒 */
+}
+/* --------------------------設定下方內容--------------------------------------------------------------------------------------------------*/
+/* 設定段落的基本樣式 */
+p {
+font-family: '微軟正黑體';        /* 字型設定為微軟正黑體 */
+font-weight: bold;               /* 字體粗細設為粗體 */
+font-size: 2.2em;                /* 字體大小設為22像素 */
+}
+
+/* 設定資料夾區塊的基本樣式 */
+.folder-block {
+align-items: center;  /* 這將垂直對齊資料夾名稱和按鈕 */
+border: 0.1em solid #ddd;                 /* 輕微的灰色邊框 */
+border-radius: 3%;                     /* 圓角 */
+display: flex;                          /* 使用flexbox佈局 */
+justify-content: space-between;         /* 主要內容和按鈕之間的空間均等分布 */
+cursor: pointer;                        /* 更改為手指指針 */
+width: 99%;  /* 設定資料夾塊的寬度為其容器的90% */
+overflow-wrap: break-word;  /* 使長內容（如資料夾名稱）自動換行 */
+margin-bottom: 1em;
+padding: 1%;
+}
+
+:root {
+--selected-folder-color: #2984b9;              /* 選中時的背景顏色 */
+}
+
+/* 設定資料夾區塊滑鼠懸停時的樣式 */
+.folder-block:hover {
+background-color: #2984b9;               /* 設定背景顏色 */
+}
+.button-container {
+display: flex;
+gap: 1em;  /* 這將在編輯和刪除按鈕之間添加一些間距 */
+}
+/* 編輯按鈕的基本樣式 */
+.edit-button {
+background-color: #33ab3b;            /* 背景顏色設為深綠色 */
+color: white;                         /* 文字顏色設為白色 */
+border: none;                         /* 無邊框 */
+padding: 0.5em 1em;                    /* 內距設為5像素和10像素 */
+border-radius: 10%;                   /* 邊框圓角設為4像素 */
+box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+cursor: pointer;                      /* 滑鼠移至時顯示手指樣式 */
+}
+
+/* 編輯按鈕滑鼠懸停時的樣式 */
+.edit-button:hover {
+background-color: #3a8d3e;            /* 背景顏色稍微深一點 */
+}
+
+/* 刪除按鈕的基本樣式 */
+.delete-button {
+background-color: #b5190e;            /* 背景顏色設為紅色 */
+color: white;                         /* 文字顏色設為白色 */
+border: none;                         /* 無邊框 */
+padding: 0.5em 1em;                    /* 內距設為5像素和10像素 */
+border-radius: 10%;                   /* 邊框圓角設為4像素 */
+box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+cursor: pointer;                      /* 滑鼠移至時顯示手指樣式 */
+}
+
+/* 刪除按鈕滑鼠懸停時的樣式 */
+.delete-button:hover {
+background-color: #9c1006;            /* 背景顏色稍微深一點 */
+}
+.fixed-container {
+display: flex;
+flex-direction: column;  /* 垂直排列 */
+align-items: center;     /* 水平置中 */
+gap: 0;                  /* 将间隔设置为0以去除间隔 */
+}
+
+.larger-input {
+width: 90%;              /* 使输入框更大，您可以根据需要调整 */
+padding: 10px;          /* 增加内边距，使输入框看起来更大 */
+}
+
+/* 設定提交按鈕的基本樣式 */
+.submit-button {
+display: block;                   /* 設定為行內區塊 */
+margin-left: auto;
+margin-right: auto;
+padding: 1em 5em;                     /* 內距*/
+background-color: #3999ff;              /* 背景顏色*/
+color: white;                           /* 文字顏色*/
+border: none;                           /* 無邊框 */
+border-radius: 3%;                     /* 邊框圓角 */
+cursor: pointer;                        /* 滑鼠移至時顯示手指樣式 */
+}
+/* 設定提交按鈕滑鼠懸停時的樣式 */
+.submit-button:hover {
+background-color: #226ec0;             /* 設定背景顏色 */
+}
+
+/* 設定提交按鈕被按下時的樣式 */
+.submit-button:active {
+background-color: #3999ff;             /* 設定背景顏色*/
+}
+
+/* 隱藏檔案輸入元素 */
+#fileInput {
+display: none;                         /* 設定為不顯示 */
+}
+
+/* 設定滑動條容器的樣式 */
+/* 將 slider-container 內的所有元素置中 */
+.slider-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100%;            /* 這取決於您想要的高度，可以是100%、100vh或其他值 */
+text-align: center;
+align-items: flex-start; /* 保證所有元素從左側開始對齊 */
+}
+
+/* 如果您需要更多的空間，可以為每個 slider-label 添加 margin 或 padding */
+.slider-label {
+box-sizing: border-box;
+margin-bottom: 1em;
+display: grid;
+place-items: center; /* 这会同时垂直和水平居中内容 */
+height: 100%;        /* 同上，這取決於您想要的高度 */
+flex-direction: column;  /* 使 label 內部的元素垂直排列 */
+align-items: flex-start; /* 確保所有元素從左側開始對齊 */
+}
+#fundingScaleValue,
+#estimatedHoursValue,
+#difficultyValue,
+#collaborationValue,
+#seniorityValue {
+    display: inline-block;
+    width: 32em;   /* 設定一個固定寬度，您可以根據需要調整 */
+    text-align: right;
+}
+
+
+/* 如果您想讓內容更寬，可以使用下面這行 */
+.slider-label input[type="range"] {
+width: 40%;
+}
+
+
+
+.col-sm-1 {
+width: 98%;
+}
+
+/* 設定第一個區段的樣式 */
+.section-1 {
+margin-top: 8%;
+display: flex;                   
+width: 90%;
+justify-content: space-between;
+}
+
+/* 設定第一個區塊的樣式 */
+.box1-container {
+width: 47%; /* 寬度*/
+
+padding: 1%;
+background-color: #ffffff;
+box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+border-radius: 1%;                   /* 邊框圓角設為8像素 */
+overflow-y: auto;
+;  /* 設定高度與寬度相同，創建正方形 */
+position: relative;  /* 設置為相對定位，以便內部元素可以絕對定位 */
+
+}
+.box2-container{
+width: 47%;
+
+padding: 1%;                           /* 寬度*/    
+background-color: #ffffff;
+box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);           /* 邊框設為4像素的實線，顏色為藍色 */
+border-radius: 1%;            
+overflow-y: auto;
+    /* 設定高度與寬度相同，創建正方形 */
+position: relative;  /* 設置為相對定位，以便內部元素可以絕對定位 */
+}
+.box1-container .inner, .box2-container .inner {
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+/* overflow: auto;  如果需要，允許滾動 */
+margin: 5%;
+}
+/* 移除無序列表前的標記 */
+ul {
+list-style-type: none;                /* 沒有標記 */
+padding-left: 0;                      /* 左內距設為0 */
+}
+
+.d-flex {
+display: flex;
+justify-content: center;
+height: 100%;
+margin-top: 10%;
+}
+
+/*------------------------------加載畫面---------------------------*/
+
+
+@keyframes ldio-zt45g179kn {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(360deg) }
+  }
+  .ldio-zt45g179kn div { box-sizing: border-box!important }
+  .ldio-zt45g179kn > div {
+    position: absolute;
+    width: 144px;
+    height: 144px;
+    top: 28px;
+    left: 28px;
+    border-radius: 50%;
+    border: 16px solid #000;
+    border-color: #3999ff transparent #3999ff transparent;
+    animation: ldio-zt45g179kn 1s linear infinite;
+  }
+  
+  .ldio-zt45g179kn > div:nth-child(2), .ldio-zt45g179kn > div:nth-child(4) {
+    width: 108px;
+    height: 108px;
+    top: 46px;
+    left: 46px;
+    animation: ldio-zt45g179kn 1s linear infinite reverse;
+  }
+  .ldio-zt45g179kn > div:nth-child(2) {
+    border-color: transparent #eeeeee transparent #eeeeee
+  }
+  .ldio-zt45g179kn > div:nth-child(3) { border-color: transparent }
+  .ldio-zt45g179kn > div:nth-child(3) div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+  }
+  .ldio-zt45g179kn > div:nth-child(3) div:before, .ldio-zt45g179kn > div:nth-child(3) div:after { 
+    content: "";
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -16px;
+    left: 48px;
+    background: #3999ff;
+    border-radius: 50%;
+    box-shadow: 0 128px 0 0 #3999ff;
+  }
+  .ldio-zt45g179kn > div:nth-child(3) div:after {
+    left: -16px;
+    top: 48px;
+    box-shadow: 128px 0 0 0 #3999ff;
+  }
+  
+  .ldio-zt45g179kn > div:nth-child(4) { border-color: transparent; }
+  .ldio-zt45g179kn > div:nth-child(4) div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+  }
+  .ldio-zt45g179kn > div:nth-child(4) div:before, .ldio-zt45g179kn > div:nth-child(4) div:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -16px;
+    left: 30px;
+    background: #eeeeee;
+    border-radius: 50%;
+    box-shadow: 0 92px 0 0 #eeeeee;
+  }
+  .ldio-zt45g179kn > div:nth-child(4) div:after {
+    left: -16px;
+    top: 30px;
+    box-shadow: 92px 0 0 0 #eeeeee;
+  }
+  .loadingio-spinner-double-ring-rtrn25wcz2g {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    overflow: hidden;
+
+  }
+  .ldio-zt45g179kn {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+  }
+  .ldio-zt45g179kn div { box-sizing: content-box; }
+
+  .loading-screen {
+   display: none; 
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 9999;
+   background-color: rgba(255, 255, 255, 0.8);
+   justify-content: center; /* 新增 */
+   align-items: center; /* 新增 */
+ }
+
+ /*------------------------------提示框---------------------------*/
+.header-wrapper {
+  display: flex;
+  align-items: center ;  /* 使得 h2 和 .hover-text 垂直居中對齊 */
+  justify-content: space-between ;
+}
+.tooltip-text {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 20em;
+  color: white;
+  font-size: 0.4em;
+  background-color: #192733;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  opacity: 0;       /* 默認為不可見 */
+  transition: opacity 0.5s;
+  pointer-events: none;
+  white-space: pre-line;
+  text-align: left;
+}
+
+.hover-text {
+  position: relative;
+  display: inline-block;
+  font-family: Arial;
+  text-align: center;
+  transform: translate(-1.8em, -0.6em);  /* Adjust the entire container */
+}
+
+
+
+.info-icon {
+  position: relative;
+  font-size: 30px;
+  transform: translate(-17em, -0.0em);
+}
+
+.info-icon:hover .tooltip-text {
+  opacity: 1; /* Make it visible */
+}

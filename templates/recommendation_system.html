@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 設定文件編碼為 UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- 設定響應式設計的視窗寬度和初始縮放比例 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 設定網頁的標題 -->
+    <title>推薦系統</title>
+    <!-- 引入自定義的CSS樣式表，使用Flask的url_for函數動態生成路徑 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='recommendation_system_styles.css') }}">
+    <!-- 引入自定義的JavaScript文件，使用Flask的url_for函數動態生成路徑，且設定為異步加載 -->
+    <script src="{{ url_for('static', filename='recommendation_system_scripts.js') }}" defer></script>
+    <!-- 加入jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" href=".\static\recommendation-system.png" type="image/png">
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><h1>智新資通股份有限公司</h1></div>
+        <div class="nav-buttons">
+            <button onclick="location.href='/'">推薦系統</button>
+            <button onclick="location.href='/engineer_update'">工程師資料更新</button>
+            <button onclick="location.href='/model_update'">模型更新</button>
+        </div>
+    </div>
+    <div class="content-wrapper"> 
+        <form id="orderForm" action="/submit_project_data" method="post">
+            <div class="input-information">
+                <input type="hidden" id="orderedList" name="orderedList" value="{{ orderedList if orderedList else '' }}">
+                <div class="left-section">
+                    <div class="project-input section-block">
+                        <div class="header-wrapper">
+                            <h2>輸入專案資料</h2>
+                            <div class="hover-text">
+                                <span class="info-icon">&#x2139;  
+                                    <span class="tooltip-text" id="fade">操作說明
+
+                                        經費規模：請輸入專案的預算經費，單位為「萬」。
+
+                                        評估工時：請輸入評估的專案完成工時，單位為「天」。
+
+                                        專案難易度：點擊向下箭頭開啟下拉選單，從中選擇您認為的專案難易度。
+
+                                        專案類型：點擊向下箭頭開啟下拉選單，選擇您的專案類型。
+                                    </span>
+                                </span>
+                            </div>
+                        </div>            
+                        <div class="input-group">
+                            <div class="budget-hours">
+                                <label>經費規模(萬): <input type="number" id="budget" name="budget" value="{{ budget if budget else '' }}" min="0" required></label>
+                                <label>評估工時(天): <input type="number" id="hours" name="hours" value="{{ hours if hours else '' }}" min="0" required></label>
+                            </div>
+                            <div class="difficulty-type">
+                                <label>
+                                    難中易:
+                                    <select name="difficulty" required>
+                                        <option value="難" {% if difficulty == '難' %}selected{% endif %}>難</option>
+                                        <option value="中" {% if difficulty == '中' %}selected{% endif %}>中</option>
+                                        <option value="易" {% if difficulty == '易' %}selected{% endif %}>易</option>
+                                    </select>                                    
+                                </label>
+                                <label>
+                                    專案類型:
+                                    <select name="project_type" required>
+                                        <option value="APP開發" {{ 'selected' if project_type == 'APP開發' else '' }}>APP開發</option>
+                                        <option value="客製化專案" {{ 'selected' if project_type == '客製化專案' else '' }}>客製化專案</option>
+                                        <option value="網站開發" {{ 'selected' if project_type == '網站開發' else '' }}>網站開發</option>
+                                        <option value="維護案" {{ 'selected' if project_type == '維護案' else '' }}>維護案</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orderlist-section">
+                        <div class="header-wrapper">
+                            <h2>排序方式</h2>
+                            <div class="hover-text">
+                                <span class="info-icon">&#x2139;  
+                                    <span class="tooltip-text" id="fade">操作說明
+
+                                        您可以透過拖曳方式，調整五個不同的排序條件的優先順序，以符合特定需求或偏好。
+                                        這些條件包括：
+
+                                        協作人數：從少到多
+                                        新進工程師人數：從少到多
+                                        資深工程師人數：從少到多
+                                        預估工時(天)：從少到多
+                                        專案成效：從高到低
+
+                                        系統將依據您設定的優先順序對推薦排名進行排序。
+                                        例如，若您將「預估工時(天)」設為最優先，接著是「專案成效」，那麼系統會首先考慮預估工時，從最短的開始排列，之後再根據專案的成效進行排序，從效益最高的開始。
+                                                                        </span>
+                                </span>
+                            </div> 
+                        </div>       
+                        <div class="orderlist"></div>
+                        <ul class="list" name="list">
+                            <li draggable="true" name="settings-list[]" >預估工時(天)</li>
+                            <li draggable="true" name="settings-list[]" >專案成效</li>
+                            <li draggable="true" name="settings-list[]" >新進工程師人數</li>
+                            <li draggable="true" name="settings-list[]" >資深工程師人數</li>
+                            <li draggable="true" name="settings-list[]">協作人數</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="middle-section">
+                    <div class="advanced-settings section-block">
+                        <div class="header-wrapper">
+                            <h2>進階設定</h2>
+                            <span class="info-icon">&#x2139;  
+                                <span class="tooltip-text" id="fade">操作說明
+
+                                    範圍設定：
+                                    1.協作人數：設定推薦結果中協作人數的範圍。
+                                    2.平均年資：設定推薦結果中協作人員的平均年資範圍。
+                                    3.預估工時超出範圍：設定預估工時可以超出評估工時的最大天數，超過此天數的結果將不被推薦。例如，評估工時3天，超出上限2天，則預估工時超過5天的不會推薦。
+
+                                    權重設定：
+                                    經驗：權重越高，推薦結果將偏向經驗豐富的人選。
+                                    擅長：權重越高，推薦結果將偏向技能優秀的人選。
+                                    喜好：權重越高，推薦結果將偏向對專案有熱情的人選。
+                                    增加「擅長」和「喜好」的權重，能提升較無經驗但擅長及喜好程度高的工程師被推薦的機率。
+                                </span>
+                            </span>
+                        </div>
+                        <div class="seting-content">
+                            <div class="uplowbound">
+                                <div class="uplowbound-left">
+                                    <h4>1.協作人數</h4>
+                                    <div class="bound-container">
+                                        <label>上界: <input type="number" id="collaborator-max" name="collaborator-max" value="{{ collaborator_max if collaborator_max else '' }}" required></label>
+                                        <label>下界: <input type="number" id="collaborator-min" name="collaborator-min" value="{{ collaborator_min if collaborator_min else '' }}" min="1" required></label>
+                                    </div>
+                                    <h4>2.平均年資</h4>
+                                    <div class="bound-container">
+                                        <label>上界: <input type="number" id="experience-max" name="experience-max" value="{{ experience_max if experience_max else '' }}" required></label>
+                                        <label>下界: <input type="number" id="experience-min" name="experience-min" value="{{ experience_min if experience_min else '' }}" min="1" required></label>
+                                    </div>                                                                        
+                                </div>
+                                <div class="uplowbound-right">
+                                    <h4>3.預估工時超出範圍</h4>
+                                    <label>上界: <input type="number" id="hours-exceed-max" name="hours-exceed-max" value="{{ hours_exceed_max if hours_exceed_max else '' }}" min="0" required></label>
+                                </div>
+                            </div>
+                            <div class="sliders section-block">
+                                <label>
+                                    <span>經驗:</span>
+                                    <input type="range" min="0" max="1" step="0.05" name="experience" id="experienceSlider" value="{{ experience if experience else '0.5' }}">
+                                    <span id="experienceValue">{{ experience if experience else '0.5' }}</span>
+                                </label>
+                                <label>
+                                    <span>擅長:</span>
+                                    <input type="range" min="0" max="1" step="0.05" name="expertise" id="expertiseSlider" value="{{ expertise if expertise else '0.5' }}">
+                                    <span id="expertiseValue">{{ expertise if expertise else '0.5' }}</span>
+                                </label>
+                                <label>
+                                    <span>喜好:</span>
+                                    <input type="range" min="0" max="1" step="0.05" name="preference" id="preferenceSlider" value="{{ preference if preference else '0.5' }}">
+                                    <span id="preferenceValue">{{ preference if preference else '0.5' }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="start">開始推薦</button>
+                </div>
+            </div>
+        </form>
+        <div class="right-section">
+            <div class="recommendations section-block">
+                <h2>推薦排名</h2>
+                <div class="scrollable-table">
+                    {% for table in tables %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    {% for title in titles %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{ table|safe }}
+                            </tbody>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="loadingScreen" class="loading-screen">
+            <div class="loadingio-spinner-double-ring-rtrn25wcz2g">
+            <div class="ldio-zt45g179kn">
+                <div></div>
+                <div></div>
+                <div><div></div></div>
+                <div><div></div></div>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

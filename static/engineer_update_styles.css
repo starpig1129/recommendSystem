@@ -1,0 +1,158 @@
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #eeeeee;
+}
+.header {
+position: fixed; /* 使用固定定位 */
+top: 0; /* 將 .header 固定在網頁最上方 */
+left: 0;
+right: 0;
+display: flex;
+justify-content: space-between;
+background-color: #ffffff;
+padding: 0.5% 1%; 
+align-items: flex-start;
+z-index:10;
+}
+.logo {
+    margin: 0;
+}
+.logo h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 150%;
+    color: #333;
+}
+.nav-buttons {
+    display: flex;
+    gap: 2%; 
+}
+.nav-buttons button {
+    background-color: #3999ff;
+    color: #fff;
+    border: none;
+    padding: 1.5% 3%;
+    border-radius: 4%;
+    cursor: pointer;
+    width: 12em !important;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.nav-buttons button:hover {
+    transform: scale(1.03); /* 這將按鈕放大10% */
+    transition: transform 0.1s ease; /* 這將平滑地過渡放大效果，時長為0.3秒 */
+}
+.content-wrapper {
+    
+padding-top: 1%; /* 增加2%的距離，原先的7%加上2% */
+padding-bottom: 1%;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+vertical-align: top;
+flex: 1;
+width: 99%;
+margin: 0.5%;
+background-color: #ffffff;
+border-radius: 1%;
+box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+font-size: 1em;
+margin-top: 6%;
+position: relative;
+}
+h2 {
+margin-left: 20.5%;
+width: 90%;
+white-space: nowrap;
+}
+.addbutton{
+    background-color: #3999ff;
+    color: #fff;
+    border: none;
+    padding: 1em;
+    border-radius: 4%;
+    cursor: pointer;
+    width: 18em !important;
+    align-self: flex-end; 
+    margin: 1.5%;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    font-size: 1em;
+}
+.addbutton:hover {
+    transform: scale(1.03); /* 這將按鈕放大10% */
+    transition: transform 0.1s ease; /* 這將平滑地過渡放大效果，時長為0.3秒 */
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center ;  /* 使得 h2 和 .hover-text 垂直居中對齊 */
+    justify-content: space-between ;
+}
+.tooltip-text {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 30em;
+    color: white;
+    font-size: 0.4em;
+    background-color: #192733;
+    border-radius: 2%;
+    padding: 1em 1.5em 1em 1.5em;
+    opacity: 0;       /* 默認為不可見 */
+    transition: opacity 0.5s;
+    pointer-events: none;
+    white-space: pre-line;
+    text-align: left;
+}
+
+.hover-text {
+    position: relative;
+    display: inline-block;
+    font-family: Arial;
+    text-align: center;
+}
+.info-icon {
+    position: relative;
+    font-size: 1.8em;
+    font-family: Arial, sans-serif;
+    margin-left:500%;
+}
+
+.info-icon:hover .tooltip-text {
+    opacity: 1; /* Make it visible */
+}
+
+table {
+    width: 97%;
+    table-layout: fixed;
+    margin: 1.5%;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+.content-wrapper table tbody tr:hover {
+    background-color: lightgray; /* 修改为你想要的颜色 */
+}
+th, td {
+    width: 2em;
+    height: 0.6em;
+    overflow: hidden;
+    text-align: center;        /* 水平置中 */
+    vertical-align: middle;    /* 垂直置中 */
+}
+td input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 0.1em solid #ccc;
+    padding: 0;
+    margin: 0;
+}
+.scrollable-table {
+    max-height: 55em;  /* 设置您想要的高度 */
+    overflow-y: auto;
+}

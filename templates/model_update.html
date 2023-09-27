@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- 設定文件編碼為 UTF-8 -->
+    <meta charset="UTF-8">
+    
+    <!-- 設定響應式設計的視窗寬度和初始縮放比例 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 設定網頁的標題 -->
+    <title>模型更新</title>
+    
+    <!-- 引入自定義的CSS樣式表，使用Flask的url_for函數動態生成路徑 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='mod_update_styles.css') }}">
+    
+    <!-- 引入自定義的JavaScript文件，使用Flask的url_for函數動態生成路徑，且設定為異步加載 -->
+    <script src="{{ url_for('static', filename='mod_update_scripts.js') }}" defer></script>
+    <link rel="icon" href=".\static\mod-update.png" type="image/png">
+</head>
+
+
+<body>
+    <!-- 頁首區域-->
+    <div class="header">
+        <!-- 標誌 -->
+        <div class="logo">
+            <h1>智新資通股份有限公司</h1>
+        </div>
+        
+        <!-- 導航按鈕 -->
+        <div class="nav-buttons">
+            <!-- 推薦系統按鈕，點擊後導向根路徑 -->
+            <button onclick="location.href='/'">推薦系統</button>
+            
+            <!-- 工程師資料更新按鈕，點擊後導向/engineer_update路徑 -->
+            <button onclick="location.href='/engineer_update'">工程師資料更新</button>
+            
+            <!-- 模型更新按鈕 -->
+            <button onclick="location.href='/model_update'">模型更新</button>
+        </div>
+    </div>
+    <!-- 主要內容區域，使用flexbox佈局 -->
+    <div class="section-1">
+        <!-- 左側容器，顯示模型列表 -->
+        <div class="box2-container">
+            <div class="inner">
+                <div class="header-wrapper">
+                    <!-- 模型列表標題 -->
+                    <p >模型列表</p>
+                    <span class="info-icon">&#x2139;  
+                        <span class="tooltip-text" id="fade">操作說明
+
+                            「模型列表」可查看目前所有可用的模型，從列表中選擇您希望推薦系統使用的模型。
+
+                             按下「編輯」可修改此模型的名稱，按下「刪除」可刪除此模型。
+                        </span>
+                    </span>
+                </div>
+                <div class="col-sm-1">
+                    <!-- 使用Flask的Jinja模板迴圈顯示模型資料夾 -->
+                    {% for folder in folders %}
+                    <div class="folder-block" onclick="selectFolder('{{ folder }}')" 
+                    style="{% if folder == current_model %}background-color: #2984b9;{% endif %}">
+                    <!-- 顯示資料夾名稱 -->
+                    <span>{{ folder }}</span>
+                        <!-- 按鈕容器 -->
+                        <div class="button-container">
+                            <!-- 編輯資料夾名稱按鈕 -->
+                            <button class='edit-button' onclick="editFolderName('{{ folder }}'); event.stopPropagation();">編輯</button>
+                            <!-- 刪除資料夾按鈕 -->
+                            <button class='delete-button' onclick="deleteFolder('{{ folder }}'); event.stopPropagation();">刪除</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- 右側容器，提供模型建立功能 -->    
+        <div class="box1-container">
+            <div class="inner">
+                <div class="header-wrapper">
+                    <!-- 建立模型標題 -->
+                    <p>建立模型</p>
+                    <span class="info-icon">&#x2139;  
+                        <span class="tooltip-text" id="fade">操作說明
+
+                            輸入您想要的模型名稱，按下「建立模型」按鈕以創建新模型，新創建的模型將會自動加入到「模型列表」中。
+
+                            若您的資料不足，可勾選「加入生成資料」，系統將依照您設定的相關係數自動生成資料。
+                        </span>
+                    </span>
+                </div>
+                <!-- 主要建立模型的表單內容 -->
+                <div class="fixed-container">
+                    <input type="text" name="modelName" placeholder="輸入模型名稱" class="model-name-input larger-input" required>
+                    <label for="showSlidersCheckbox">
+                        <input type="checkbox" id="showSlidersCheckbox">加入生成資料
+                    </label>
+                </div>                                               
+                <div class="slider-container" id="sliderContainer">
+                    <div class="slider-label">
+                        <h3>與開發時間的相關係數</h3>
+                        <label>
+                            <span>經費規模:</span>
+                            <input type="range" min="-1" max="1" step="0.01" name="fundingScale" value="{{ settings.經費規模 }}" id="fundingScaleSlider" 
+                            {% if settings.checkbox_states[0] %}disabled{% endif %}>
+                                <span id="fundingScaleValue">{{ settings.經費規模 }}&ensp;</span>
+                                <input type="checkbox" {% if settings.checkbox_states[0] %}checked{% endif %}>預設
+                        </label>
+                    </div>
+                    <div class="slider-label">
+                        <label>
+                            <span>評估工時:</span>
+                            <input type="range" min="-1" max="1" step="0.01" name="estimatedHours" value="{{ settings.評估工時 }}"id="estimatedHoursSlider"
+                            {% if settings.checkbox_states[1] %}disabled{% endif %}>
+                                <span id="estimatedHoursValue">{{ settings.評估工時 }}&ensp;</span>
+                                <input type="checkbox" {% if settings.checkbox_states[1] %}checked{% endif %}>預設
+                        </label>
+                    </div>
+                    <div class="slider-label">
+                        <label>
+                            <span>難中易  :</span>
+                            <input type="range" min="-1" max="1" step="0.01" name="difficulty" value="{{ settings.難中易 }}"id="difficultySlider"
+                            {% if settings.checkbox_states[2] %}disabled{% endif %}>
+                            <span id="difficultyValue">{{ settings.難中易 }}&ensp;</span>
+                            <input type="checkbox" {% if settings.checkbox_states[2] %}checked{% endif %}>預設
+                        </label>
+                    </div>
+                    <div class="slider-label">
+                        <label>
+                            <span>年資   :</span>
+                            <input type="range" min="-1" max="1" step="0.01" name="seniority" value="{{ settings.年資 }}"id="senioritySlider"
+                            {% if settings.checkbox_states[3] %}disabled{% endif %}>
+                                <span id="seniorityValue">{{ settings.年資 }}&ensp;</span>
+                            <input type="checkbox" {% if settings.checkbox_states[3] %}checked{% endif %}>預設
+                        </label>
+                    </div>
+                    <div class="slider-label">
+                        <label>
+                            <span>協作人數:</span>
+                            <input type="range" min="-1" max="1" step="0.01" name="collaboration" value="{{ settings.是否有團隊協作 }}"id="collaborationSlider"
+                            {% if settings.checkbox_states[4] %}disabled{% endif %}>
+                                <span id="collaborationValue">{{ settings.是否有團隊協作}}&ensp;</span>
+                            <input type="checkbox" {% if settings.checkbox_states[4] %}checked{% endif %}>預設
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="generate submit-button">
+                    建立模型
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- 加載畫面 -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loadingio-spinner-double-ring-rtrn25wcz2g">
+        <div class="ldio-zt45g179kn">
+            <div></div>
+            <div></div>
+            <div><div></div></div>
+            <div><div></div></div>
+        </div>
+        </div>
+    </div>
+  
+<ul id="fileList"></ul>
+</body>
+
+</html>

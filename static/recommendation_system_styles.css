@@ -1,0 +1,513 @@
+/* 設定網頁主體的基本樣式 */
+body {
+    font-family: Arial, sans-serif;  /* 字型設定為Arial，如果找不到則使用系統的sans-serif字型 */
+    margin: 0;                       /* 邊距設為0 */
+    padding: 0;                      /* 內距設為0 */
+    background-color: #eeeeee;       /* 設定背景顏色 */
+}
+
+/* --------------------------- 最上面的智新資通股份有限公司及三個按鈕 ----------------------------*/
+/* 設定頁首的樣式 */
+.header {
+    position: fixed;                      /* 使用固定位置，始終保持在視口頂部 */
+    top: 0;                               /* 距離頂部0像素 */
+    left: 0;                              /* 距離左邊0像素 */
+    right: 0;                             /* 距離右邊0像素 */
+    display: flex;                        /* 使用flexbox佈局 */
+    justify-content: space-between;       /* 內容之間的空間均等分布 */
+    background-color: #ffffff;            /* 背景顏色*/
+    padding: 0.5% 1%;                    /* 內距 */
+    align-items: flex-start;              /* 內容靠上對齊 */
+    z-index: 10;                          /* 堆疊順序設為*/
+}
+
+/* 設定logo區塊的樣式 */
+.logo {
+    margin: 0;                            /* 外距設為0 */
+}
+
+/* 設定logo中的標題樣式 */
+.logo h1 {
+    margin: 0;                            /* 外距設為0 */
+    padding: 0;                           /* 內距設為0 */
+    font-size: 150%;                    
+    color: #333;                         
+}
+
+/* 設定導航按鈕的容器樣式 */
+.nav-buttons {
+    display: flex;                      
+    gap: 2%;                            
+}
+
+.nav-buttons button {
+    background-color: #3999ff;
+    color: white;
+    border: none;
+    padding: 1.5% 3%;
+    border-radius: 4%;
+    cursor: pointer;
+    width: 12em !important;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* 設定導航按鈕滑鼠懸停時的樣式 */
+.nav-buttons button:hover {
+    transform: scale(1.03); /* 這將按鈕放大10% */
+    transition: transform 0.1s ease; /* 這將平滑地過渡放大效果，時長為0.3秒 */
+}
+
+/* -------------------------------下方內容，三大塊----------------------------- */
+.content-wrapper {
+    margin-top: 5%;
+    padding: 1.25% 2.5%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.input-information {
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------------------------輸入專案、排序方式---------------------------------- */
+.left-section{
+    display: flex;
+    flex-direction: row;
+    width: 97%;
+    flex: 1;
+}
+
+/* ------------------------------輸入專案---------------------------------- */
+.project-input {
+    background-color: #ffffff;
+    border-radius: 3%;
+    box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    flex: 1; 
+    padding: 1.5%;
+}
+
+.project-input h2 {
+    margin-left: 5%;
+    margin-top: 2.5%;
+    white-space: nowrap; /* 防止內容換行 */
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: -7%;
+    margin-top: 2%;
+}
+
+.budget-hours, .difficulty-type {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.input-group > div {
+    flex: 1;
+}
+
+.budget-hours input {
+    width: 70%;
+    padding: 0.8em;
+    border: 0;
+    border-radius:5%;
+    background-color: #e6e6e6;
+    margin-top: 4%;
+}
+
+.budget-hours label {
+    margin-bottom: 1em;
+}
+
+.difficulty-type select {
+    width: 70%;
+    padding: 0.8em;
+    border: 0;
+    border-radius: 5%;
+    margin-top: 4%;
+    outline: none;
+    background-color: #e6e6e6;
+    margin-bottom: 1em;
+}
+
+/* ------------------------------排序條件---------------------------------- */
+.orderlist-section {
+    background-color: #ffffff;
+    border-radius: 3%;
+    box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    flex: 1;
+    padding: 1.5%;
+    margin-left: 1%;
+}
+
+.orderlist-section h2 {
+    margin-left: 5%;
+    margin-top: 2.5%;
+    white-space: nowrap; /* 防止內容換行 */
+}
+
+.list {
+    list-style-type: decimal;
+    padding-left: 5%;
+    margin-left: 10%;
+    width: 60%;
+    margin-top: -2%;
+}
+
+.list .moving{
+    background: transparent;
+    color: transparent;
+    border: 0.1em dashed #000000;
+}  
+
+.list li {
+    padding: 0.6em 1em;
+    border: 0.1em;
+    border-radius: 5%;
+    margin-bottom: 5%;
+    background-color: #eaeaea;
+}
+
+.list li:hover {
+    background-color: #3999ff;
+}
+
+/* ------------------------------進階設定---------------------------------- */
+.advanced-settings {
+    width: 94%;
+    margin-top: 1%;
+    background-color: #ffffff;
+    border-radius: 3%;
+    display: flex;
+    flex-direction: column;  /* 確保子元素垂直排列 */
+    justify-content: flex-start;  /* 使元素從容器的頂部開始排列 */
+    padding: 1.5%;  /*增加一些內距使元素之間有一些間距*/
+}
+.advanced-settings h2 {
+    margin-left: 3.5%;
+    margin-top: 1%;
+    white-space: nowrap; /* 防止內容換行 */
+}
+.seting-content {
+    width: 100%;  /* 使用全部的寬度 */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -4.5%;
+}
+.uplowbound {
+    display: flex;
+    flex-direction: row;
+    background-color: #fbfff9;/*拉條塊的顏色*/
+    border-radius: 10px;/*邊框圓滑*/
+    box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+    width: 400%;
+    height: 45%;
+    padding-bottom: 3%;
+    margin-top: 3%;
+}
+.uplowbound h4{
+    margin-left: -7%;
+    white-space: nowrap; /* 防止內容換行 */
+}
+.uplowbound input{
+    background-color: #eaeaea;/*輸入欄顏色*/
+    width: 35% !important; /*輸入欄長度*/
+    margin-left: 5%;
+    padding: 0.8em;/*拉條大小*/
+    border: 0.8em;
+    border-radius: 3%;
+    margin-top: 3%;/*拉條上距*/
+}
+
+.uplowbound-left, .uplowbound-right {
+    display: flex;
+    flex-direction: column;
+    width: 40%;/* 每一側的寬度 */
+}
+
+.uplowbound-left label, .uplowbound-right label {
+    display: inline-flex; /*使 label 內的元素水平排列 */
+    align-items: center; /*垂直居中對齊 */
+    margin-bottom: 2%; /* 為每個 label 增加底部間距 */
+}
+
+.uplowbound-left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+}
+
+.uplowbound-right {
+    display: flex;
+    flex-direction: column;
+}
+.uplowbound-right h4 {
+    margin-bottom: 7%;
+}
+.bound-container {
+    margin-bottom: 1%;
+    margin-top: -10%;
+
+}
+
+
+.sliders {
+    background-color: #fbfff9;/*拉條塊的顏色*/
+    padding: 5%;
+    border-radius: 5%;/*邊框圓滑*/
+    margin-left: 2%;
+    box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    width: 140%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.5em;/*拉條塊*/
+    margin-top: 2.8%;
+}
+#experienceValue,
+#expertiseValue,
+#preferenceValue {
+    display: inline-block;
+    width: 50px;   /* 設定一個固定寬度，您可以根據需要調整 */
+    text-align: right;
+}
+
+.sliders input {
+    box-sizing: border-box;
+    width: 90%; /*拉條長度*/
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    margin-top: 1%;/*拉條上距*/
+}
+
+.sliders label {
+    margin-bottom: 15%;
+}
+/*------------------------------開始推薦鈕----------------------------------*/
+.middle-section button {
+    cursor: pointer; /* 添加這一行 */
+    width: 28em; /* 调整这个值来控制按钮的宽度 */
+    height: 4em; /* 调整这个值来控制按钮的高度 */
+    margin-top: 1.5%;
+    margin-left: 24%;
+    background-color: #3999ff;
+    color: #fff;
+    border: none;
+    border-radius: 4%;
+    transition: transform 0.3s ease;
+}
+
+.middle-section button:hover {
+    transform: scale(1.03); /* 這將按鈕放大10% */
+    transition: transform 0.1s ease; /* 這將平滑地過渡放大效果，時長為0.3秒 */
+}
+/* ------------------------------推薦排名---------------------------------- */
+.right-section {
+    width: 90%;
+    height: auto;
+    background-color: #ffffff;
+    padding: 2em;
+    border-radius:2%;
+    box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+}
+
+.recommendations {
+    background-color: #ffffff;
+}
+
+.recommendation-table {
+    max-height: -5%;
+    overflow-y: auto;
+}
+
+table {
+    width: 100.5%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1em;
+    border: 0.1em solid #2c2f33;
+    text-align: center;
+}
+
+.recommendations table tbody tr:hover {
+    background-color: lightgray;
+}
+
+.scrollable-table {
+    max-height:40em;  /* 或者其他您想要的高度 */
+    overflow-y: auto;
+}
+
+/*------------------------------提示框---------------------------*/
+.header-wrapper {
+    display: flex;
+    align-items: center ;  /* 使得 h2 和 .hover-text 垂直居中對齊 */
+    justify-content: space-between ;
+}
+.tooltip-text {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 20em;
+    color: white;
+    font-size: 0.5em;
+    background-color: #192733;
+    border-radius: 1em;
+    padding: 0.5em 1em;
+    opacity: 0;       /* 默認為不可見 */
+    transition: opacity 0.5s;
+    pointer-events: none;
+    white-space: pre-line;
+    text-align: left;
+}
+
+.hover-text {
+    position: relative;
+    display: inline-block;
+    font-family: Arial;
+    text-align: center;
+    transform: translate(-1.8em, -0.6em);  /* Adjust the entire container */
+}
+
+
+
+.info-icon {
+    position: relative;
+    font-size: 24px;
+    transform: translate(-1.8em, -0.6em);
+}
+
+.info-icon:hover .tooltip-text {
+    opacity: 1; /* Make it visible */
+}
+
+/*------------------------------加載畫面---------------------------*/
+@keyframes ldio-zt45g179kn {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(360deg) }
+  }
+  .ldio-zt45g179kn div { box-sizing: border-box!important }
+  .ldio-zt45g179kn > div {
+    position: absolute;
+    width: 144px;
+    height: 144px;
+    top: 28px;
+    left: 28px;
+    border-radius: 50%;
+    border: 16px solid #000;
+    border-color: #3999ff transparent #3999ff transparent;
+    animation: ldio-zt45g179kn 1s linear infinite;
+  }
+  
+  .ldio-zt45g179kn > div:nth-child(2), .ldio-zt45g179kn > div:nth-child(4) {
+    width: 108px;
+    height: 108px;
+    top: 46px;
+    left: 46px;
+    animation: ldio-zt45g179kn 1s linear infinite reverse;
+  }
+  .ldio-zt45g179kn > div:nth-child(2) {
+    border-color: transparent #eeeeee transparent #eeeeee
+  }
+  .ldio-zt45g179kn > div:nth-child(3) { border-color: transparent }
+  .ldio-zt45g179kn > div:nth-child(3) div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+  }
+  .ldio-zt45g179kn > div:nth-child(3) div:before, .ldio-zt45g179kn > div:nth-child(3) div:after { 
+    content: "";
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -16px;
+    left: 48px;
+    background: #3999ff;
+    border-radius: 50%;
+    box-shadow: 0 128px 0 0 #3999ff;
+  }
+  .ldio-zt45g179kn > div:nth-child(3) div:after {
+    left: -16px;
+    top: 48px;
+    box-shadow: 128px 0 0 0 #3999ff;
+  }
+  
+  .ldio-zt45g179kn > div:nth-child(4) { border-color: transparent; }
+  .ldio-zt45g179kn > div:nth-child(4) div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+  }
+  .ldio-zt45g179kn > div:nth-child(4) div:before, .ldio-zt45g179kn > div:nth-child(4) div:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -16px;
+    left: 30px;
+    background: #eeeeee;
+    border-radius: 50%;
+    box-shadow: 0 92px 0 0 #eeeeee;
+  }
+  .ldio-zt45g179kn > div:nth-child(4) div:after {
+    left: -16px;
+    top: 30px;
+    box-shadow: 92px 0 0 0 #eeeeee;
+  }
+  .loadingio-spinner-double-ring-rtrn25wcz2g {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    overflow: hidden;
+
+  }
+  .ldio-zt45g179kn {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+  }
+  .ldio-zt45g179kn div { box-sizing: content-box; }
+
+  .loading-screen {
+   display: none; 
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 9999;
+   background-color: rgba(255, 255, 255, 0.8);
+   justify-content: center; /* 新增 */
+   align-items: center; /* 新增 */
+ }
+
+
+
+
+
+
+
+
